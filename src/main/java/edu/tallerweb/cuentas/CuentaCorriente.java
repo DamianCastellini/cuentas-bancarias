@@ -77,7 +77,7 @@ public class CuentaCorriente extends AbstractCuenta {
 			 else
 			 {
 			  if(this.saldo < monto){
-				  if((this.saldo + this.descubiertoTotal + ((this.descubiertoTotal - monto) * 1.05)) > monto){					  
+				  if((this.saldo + this.descubiertoTotal + ((monto - this.saldo) * 1.05)) > monto){					  
 					  this.descubiertoTotal -= ((monto - this.saldo) * 1.05 );
 					  this.saldo = 0.00 ;
 					  }
