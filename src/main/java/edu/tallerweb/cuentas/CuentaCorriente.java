@@ -20,17 +20,14 @@ public class CuentaCorriente extends AbstractCuenta {
 	private Double descubiertoTotal;
 	private Double deuda;
 	
-	public CuentaCorriente(){
-		super();
-		this.deuda = 0.00;
-	}
-
 	/**
 	 * Toda cuenta corriente se inicia con un límite total
 	 * para el descubierto.
 	 * @param descubiertoTotal
 	 */
 	public CuentaCorriente(final Double descubiertoTotal) {
+		super();
+		this.deuda = 0.00;
 		this.descubiertoTotal = descubiertoTotal;
 		//throw new RuntimeException("No implementado aún");
 	}
