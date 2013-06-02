@@ -39,8 +39,8 @@ public class CajaAhorros extends AbstractCuenta {
 				numeroDeExtraccion++;
 			}
 			else{
-				if(this.saldo >= ( monto + 6.00 ) && numeroDeExtraccion > 5){
-					this.saldo -= (monto + 6.00);
+				if(this.saldo >= (monto + 6.00) && numeroDeExtraccion > 5){
+					this.saldo = this.saldo - (monto + 6.00);
 					numeroDeExtraccion++;
 				}
 				else{
