@@ -50,7 +50,7 @@ public class CuentaCorriente extends AbstractCuenta {
 					this.saldo = monto - this.descubiertoTotal;
 				}
 				else{
-					this.descubiertoTotal += (this.descubiertoDeLaCuenta - monto);		
+					this.descubiertoTotal += monto;		
 				}
 				
 				}
