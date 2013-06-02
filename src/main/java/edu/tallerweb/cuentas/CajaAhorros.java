@@ -5,14 +5,26 @@ package edu.tallerweb.cuentas;
  * quinta extracción de dinero se cobre un costo adicional
  * por extracción de $ 6
  */
-public class CajaAhorros {
+public class CajaAhorros extends AbstractCuenta {
+	  private Integer numeroDeExtraccion;
 
+	public CajaAhorros(){
+		super();
+		this.numeroDeExtraccion = 0;
+	}
+	
 	/**
 	 * No hay reglas adicionales para el depósito
 	 * @param monto a depositar
 	 */
 	public void depositar(final Double monto) {
-		throw new RuntimeException("No implementado aún");
+		if(monto > 0.00){
+			this.saldo += monto;	
+		}
+		else{
+			throw new CuentaBancariaException("Sr cliente debe depositar un saldo mayor a 0 en su caja de ahorros.");
+		}
+		//throw new RuntimeException("No implementado aún");
 	}
 
 	/**
@@ -21,7 +33,22 @@ public class CajaAhorros {
 	 * @param monto a extraer
 	 */
 	public void extraer(final Double monto) {
-		throw new RuntimeException("No implementado aún");
+		if(this.saldo >= monto && numeroDeExtraccion < 5){
+			this.saldo -= monto;
+			numeroDeExtraccion++;
+		}
+		else{
+			if(this.saldo >= monto && numeroDeExtraccion >= 5){
+				this.saldo -= (monto + 6.00);
+				numeroDeExtraccion++;
+			}
+			else{
+				if(this.saldo < monto){
+					throw new CuentaBancariaException("Sr Cliente no dispone de saldo para realizar la extracci�n que desea en su caja de ahorros.");
+				}
+			}
+		}
+		//throw new RuntimeException("No implementado aún");
 	}
 
 	/**
@@ -29,7 +56,8 @@ public class CajaAhorros {
 	 * @return el saldo de la cuenta
 	 */
 	public Double getSaldo() {
-		throw new RuntimeException("No implementado aún");
+		return this.saldo;
+		//throw new RuntimeException("No implementado aún");
 	}
 
 }

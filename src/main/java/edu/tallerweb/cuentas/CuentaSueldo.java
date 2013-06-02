@@ -6,14 +6,24 @@ package edu.tallerweb.cuentas;
  * cuenta del que se quiere extraer, la operación se debe efectuar
  * correctamente.
  */
-public class CuentaSueldo {
+public class CuentaSueldo extends AbstractCuenta {
+	
+	public CuentaSueldo(){
+		super();
+	}
 
 	/**
 	 * No hay reglas adicionales para el depósito
 	 * @param monto a depositar
 	 */
 	public void depositar(final Double monto) {
-		throw new RuntimeException("No implementado aún");
+		if(monto > 0.00){
+			this.saldo += monto;	
+		}
+		else{
+			throw new CuentaBancariaException("Sr cliente debe depositar un saldo mayor a 0 en su cuenta sueldo.");
+		}
+		//throw new RuntimeException("No implementado aún");
 	}
 
 	/**
@@ -21,7 +31,13 @@ public class CuentaSueldo {
 	 * @param monto a extraer
 	 */
 	public void extraer(final Double monto) {
-		throw new RuntimeException("No implementado aún");
+		if(this.saldo >= monto){
+			this.saldo -= monto;
+		}
+		else{
+			throw new CuentaBancariaException("Sr Cliente no dispone de saldo para realizar la extracci�n que desea en su cuenta corriente.");
+		}
+		//throw new RuntimeException("No implementado aún");
 	}
 
 	/**
@@ -29,7 +45,8 @@ public class CuentaSueldo {
 	 * @return el saldo de la cuenta
 	 */
 	public Double getSaldo() {
-		throw new RuntimeException("No implementado aún");
+		return this.saldo;
+		//throw new RuntimeException("No implementado aún");
 	}
 
 }

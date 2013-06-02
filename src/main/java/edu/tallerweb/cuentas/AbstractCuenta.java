@@ -8,6 +8,11 @@ package edu.tallerweb.cuentas;
  * mentación a los métodos proporcionados.
  */
 public abstract class AbstractCuenta {
+	public Double saldo;
+	
+	public  AbstractCuenta(){
+		this.saldo = 0.00;
+	}
 
 	/**
 	 * Agrega a la cuenta el monto determinado

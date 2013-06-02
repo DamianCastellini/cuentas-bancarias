@@ -16,7 +16,14 @@ package edu.tallerweb.cuentas;
  * Pasaremos a deberle al banco $ 105 en total: los $ 100 que
  * nos cubrió, más el 5% adicional sobre el descubierto otorgado.
  */
-public class CuentaCorriente {
+public class CuentaCorriente extends AbstractCuenta {
+	private Double descubiertoTotal;
+	private Double deuda;
+	
+	public CuentaCorriente(){
+		super();
+		this.deuda = 0.00;
+	}
 
 	/**
 	 * Toda cuenta corriente se inicia con un límite total
@@ -24,7 +31,8 @@ public class CuentaCorriente {
 	 * @param descubiertoTotal
 	 */
 	public CuentaCorriente(final Double descubiertoTotal) {
-		throw new RuntimeException("No implementado aún");
+		this.descubiertoTotal = descubiertoTotal;
+		//throw new RuntimeException("No implementado aún");
 	}
 	
 	/**
@@ -34,7 +42,27 @@ public class CuentaCorriente {
 	 * @param monto a depositar
 	 */
 	public void depositar(final Double monto) {
-		throw new RuntimeException("No implementado aún");
+		if(monto > 0.00){ 
+			if(this.deuda == 0.00){
+				this.saldo += monto;
+				}
+			else{
+				if(this.deuda >= monto){
+					this.deuda -= monto;
+					}
+				else{
+					if(this.deuda < monto){
+					this.saldo = monto - this.deuda;
+					this.deuda = 0.00;
+					}
+					}
+				
+				}
+		}
+		else{
+			throw new CuentaBancariaException("Sr Cliente: Debe depositar un monto mayor a 0.");
+			}
+		//throw new RuntimeException("No implementado aún");
 	}
 
 	/**
@@ -45,7 +73,26 @@ public class CuentaCorriente {
 	 * @param monto a extraer
 	 */
 	public void extraer(final Double monto) {
-		throw new RuntimeException("No implementado aún");
+		 if(this.saldo >= monto){
+			   this.saldo -= monto;
+			 }
+			 else
+			 {
+			  if(this.saldo < monto){
+				  if((this.saldo + (this.descubiertoTotal - this.deuda))>= monto){					  
+					  this.deuda = this.deuda + ((this.saldo - monto) * 1.05 );
+					  this.saldo = 0.00;
+					  }
+				  else{
+					  throw new CuentaBancariaException("Sr. Cliente no posee la cantidad suficiente de saldo para realizar la extracci�n");
+					  }
+			  }
+				  
+		 }
+				
+			
+		
+		//throw new RuntimeException("No implementado aún");
 	}
 
 	/**
@@ -53,7 +100,8 @@ public class CuentaCorriente {
 	 * @return el saldo de la cuenta
 	 */
 	public Double getSaldo() {
-		throw new RuntimeException("No implementado aún");
+		return this.saldo;
+		//throw new RuntimeException("No implementado aún");
 	}
 	
 	/**
@@ -61,7 +109,8 @@ public class CuentaCorriente {
 	 * @return el descubierto de la cuenta
 	 */
 	public Double getDescubierto() {
-		throw new RuntimeException("No implementado aún");
+		return this.descubiertoTotal;
+		//throw new RuntimeException("No implementado aún");
 	}
 
 }
