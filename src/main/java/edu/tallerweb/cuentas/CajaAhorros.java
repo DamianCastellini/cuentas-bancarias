@@ -33,21 +33,29 @@ public class CajaAhorros extends AbstractCuenta {
 	 * @param monto a extraer
 	 */
 	public void extraer(final Double monto) {
-		if(this.saldo >= monto && numeroDeExtraccion < 5){
-			this.saldo -= monto;
-			numeroDeExtraccion++;
-		}
-		else{
-			if(this.saldo >= monto && numeroDeExtraccion >= 5){
-				this.saldo -= (monto + 6.00);
+		if(monto > 0.00){
+			if(this.saldo >= monto && numeroDeExtraccion < 5){
+				this.saldo -= monto;
 				numeroDeExtraccion++;
 			}
 			else{
-				if(this.saldo < monto){
-					throw new CuentaBancariaException("Sr Cliente no dispone de saldo para realizar la extracción que desea en su caja de ahorros.");
+				if(this.saldo >= ( monto + 6.00 ) && numeroDeExtraccion >= 5){
+					this.saldo -= (monto + 6.00);
+					numeroDeExtraccion++;
+				}
+				else{
+					if(this.saldo < monto){
+						throw new CuentaBancariaException("Sr Cliente no dispone de saldo para realizar la extracción que desea en su caja de ahorros.");
+					}
 				}
 			}
 		}
+	    else{
+			throw new CuentaBancariaException("Sr cliente el monto a extraer de su caja de ahorros debe ser mayor a 0 .");
+		}
+	
+		
+		
 		//throw new RuntimeException("No implementado aÃºn");
 	}
 

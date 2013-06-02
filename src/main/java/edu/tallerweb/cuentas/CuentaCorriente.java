@@ -73,7 +73,9 @@ public class CuentaCorriente extends AbstractCuenta {
 	 * @param monto a extraer
 	 */
 	public void extraer(final Double monto) {
-		 if(this.saldo >= monto){
+		 if(monto > 0.00){
+			 if(this.saldo >= monto){
+		 
 			   this.saldo -= monto;
 			 }
 			 else
@@ -84,12 +86,15 @@ public class CuentaCorriente extends AbstractCuenta {
 					  this.saldo = 0.00;
 					  }
 				  else{
-					  throw new CuentaBancariaException("Sr. Cliente no posee la cantidad suficiente de saldo para realizar la extracción");
+					  throw new CuentaBancariaException("Sr Cliente no posee la cantidad suficiente de saldo para realizar la extracción");
 					  }
 			  }
 				  
 		 }
-				
+		 }
+		 else{
+			 throw new CuentaBancariaException("Sr Cliente el monto a extraer de su cuenta corriente debe ser mayor a 0 .");
+		 }
 			
 		
 		//throw new RuntimeException("No implementado aÃºn");
