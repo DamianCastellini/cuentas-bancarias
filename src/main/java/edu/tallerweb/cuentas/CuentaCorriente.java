@@ -28,7 +28,6 @@ public class CuentaCorriente extends AbstractCuenta {
 	 */
 	public CuentaCorriente(final Double descubiertoTotal) {
 		super();
-	//	this.deuda = 0.00;
 		this.descubiertoTotal = descubiertoTotal;
 		this.descubiertoDeLaCuenta = descubiertoTotal;
 		//throw new RuntimeException("No implementado aún");
@@ -46,23 +45,13 @@ public class CuentaCorriente extends AbstractCuenta {
 				this.saldo += monto;
 				}
 			else{
-				  if(monto >= this.descubiertoDeLaCuenta - this.descubiertoTotal){
+				  if(monto >= (this.descubiertoDeLaCuenta - this.descubiertoTotal)){
 					this.descubiertoTotal += (this.descubiertoDeLaCuenta - monto);
 					this.saldo = monto - this.descubiertoTotal;
 				}
 				else{
 					this.descubiertoTotal += (this.descubiertoDeLaCuenta - monto);		
 				}
-				
-				/*if(this.descubiertoTotal   ){
-					this.deuda -= monto;
-					}
-				else{
-					if(this.deuda < monto){
-					this.saldo = monto - this.deuda;
-					this.deuda = 0.00;
-					}
-					}*/
 				
 				}
 		}
@@ -88,7 +77,7 @@ public class CuentaCorriente extends AbstractCuenta {
 			 else
 			 {
 			  if(this.saldo < monto){
-				  if(this.saldo + this.descubiertoTotal + ((this.descubiertoTotal - monto) * 1.05) >= monto){					  
+				  if((this.saldo + this.descubiertoTotal + ((this.descubiertoTotal - monto) * 1.05)) > monto){					  
 					  this.descubiertoTotal -= ((monto - this.saldo) * 1.05 );
 					  this.saldo = 0.00 ;
 					  }
