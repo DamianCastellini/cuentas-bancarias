@@ -18,7 +18,8 @@ package edu.tallerweb.cuentas;
  */
 public class CuentaCorriente extends AbstractCuenta {
 	private Double descubiertoTotal;
-	private Double deuda;
+	private Double descubiertoDeLaCuenta;
+
 	
 	/**
 	 * Toda cuenta corriente se inicia con un límite total
@@ -27,8 +28,9 @@ public class CuentaCorriente extends AbstractCuenta {
 	 */
 	public CuentaCorriente(final Double descubiertoTotal) {
 		super();
-		this.deuda = 0.00;
+	//	this.deuda = 0.00;
 		this.descubiertoTotal = descubiertoTotal;
+		this.descubiertoDeLaCuenta = descubiertoTotal;
 		//throw new RuntimeException("No implementado aún");
 	}
 	
@@ -40,11 +42,19 @@ public class CuentaCorriente extends AbstractCuenta {
 	 */
 	public void depositar(final Double monto) {
 		if(monto > 0.00){ 
-			if(this.deuda == 0.00){
+			if(this.descubiertoTotal == this.descubiertoDeLaCuenta){
 				this.saldo += monto;
 				}
 			else{
-				if(this.deuda >= monto){
+				  if(monto >= this.descubiertoDeLaCuenta - this.descubiertoTotal){
+					this.descubiertoTotal += (this.descubiertoDeLaCuenta - monto);
+					this.saldo = monto - this.descubiertoTotal;
+				}
+				else{
+					this.descubiertoTotal += (this.descubiertoDeLaCuenta - monto);		
+				}
+				
+				/*if(this.descubiertoTotal   ){
 					this.deuda -= monto;
 					}
 				else{
@@ -52,7 +62,7 @@ public class CuentaCorriente extends AbstractCuenta {
 					this.saldo = monto - this.deuda;
 					this.deuda = 0.00;
 					}
-					}
+					}*/
 				
 				}
 		}
@@ -78,9 +88,9 @@ public class CuentaCorriente extends AbstractCuenta {
 			 else
 			 {
 			  if(this.saldo < monto){
-				  if((this.saldo + (this.descubiertoTotal - this.deuda))>= monto){					  
-					  this.deuda = this.deuda + ((this.saldo - monto) * 1.05 );
-					  this.saldo = 0.00;
+				  if(this.saldo + this.descubiertoTotal + ((this.descubiertoTotal - monto) * 1.05) >= monto){					  
+					  this.descubiertoTotal -= ((monto - this.saldo) * 1.05 );
+					  this.saldo = 0.00 ;
 					  }
 				  else{
 					  throw new CuentaBancariaException("Sr Cliente no posee la cantidad suficiente de saldo para realizar la extracci�n");
