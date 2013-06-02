@@ -34,12 +34,12 @@ public class CajaAhorros extends AbstractCuenta {
 	 */
 	public void extraer(final Double monto) {
 		if(monto > 0.00){
-			if(this.saldo >= monto && numeroDeExtraccion < 5){
+			if(this.saldo >= monto && numeroDeExtraccion <= 5){
 				this.saldo -= monto;
 				numeroDeExtraccion++;
 			}
 			else{
-				if(this.saldo >= ( monto + 6.00 ) && numeroDeExtraccion >= 5){
+				if(this.saldo >= ( monto + 6.00 ) && numeroDeExtraccion > 5){
 					this.saldo -= (monto + 6.00);
 					numeroDeExtraccion++;
 				}
