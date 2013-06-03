@@ -31,7 +31,7 @@ public class CuentaSueldo extends AbstractCuenta {
 			if (this.saldo >= monto) {
 				this.saldo -= monto;
 				} else {
-					throw new CuentaBancariaException("No dispone de saldo para realizar la extracción.");
+					throw new CuentaBancariaException("No dispone de saldo para extraer");
 		}
 		//throw new RuntimeException("No implementado aÃºn");
 	    } else {

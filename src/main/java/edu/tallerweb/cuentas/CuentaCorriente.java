@@ -67,7 +67,7 @@ public class CuentaCorriente extends AbstractCuenta {
 			   this.saldo -= monto;
 			 } else {
 				 if (this.saldo < monto) {
-					  if (monto * COMISION <= (this.saldo + this.descubiertoTotal)) {
+					  if (monto <= (this.saldo + this.descubiertoTotal * COMISION)) {
 						  this.descubiertoTotal -= ((monto - this.saldo) * COMISION);
 						  this.saldo = CERO;
 					  } else {
