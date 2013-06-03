@@ -38,24 +38,23 @@ public class CuentaCorriente extends AbstractCuenta {
 	 * @param monto a depositar
 	 */
 	public void depositar(final Double monto) {
-		if (monto > CERO) { 
+		if (monto > CERO) {
 			if (this.descubiertoTotal == this.descubiertoDeLaCuenta) {
 				this.saldo += monto;
-				}
+			}
 			else {
-				  if (monto >= (this.descubiertoDeLaCuenta - this.descubiertoTotal)) {
+				if (monto >= (this.descubiertoDeLaCuenta - this.descubiertoTotal)) {
 					  this.saldo = monto - (this.descubiertoDeLaCuenta - this.descubiertoTotal);
 					  this.descubiertoTotal = this.descubiertoDeLaCuenta;
-				}
+				  }
 				else {
-					this.descubiertoTotal += monto;		
+					this.descubiertoTotal += monto;
 				}
-				
-				}
+			}
 		}
 		else {
 			throw new CuentaBancariaException("Sr Cliente: Debe depositar un monto mayor a 0.");
-			}
+		}
 		//throw new RuntimeException("No implementado a√∫n");
 	}
 	/**
@@ -72,20 +71,20 @@ public class CuentaCorriente extends AbstractCuenta {
 			 }
 			 else {
 				 if (this.saldo < monto) {
-				  if ((this.saldo + this.descubiertoTotal + ((this.descubiertoDeLaCuenta - this.descubiertoTotal) * COMISION)) >= monto) {					  
-					  this.descubiertoTotal -= ((monto - this.saldo) * COMISION );
-					  this.saldo = 0.00 ;
+					  if ((this.saldo + this.descubiertoTotal + 
+							  ((this.descubiertoDeLaCuenta - this.descubiertoTotal) * COMISION)) >= monto) {
+						  this.descubiertoTotal -= ((monto - this.saldo) * COMISION);
+						  this.saldo = CERO;
 					  }
-				  else {
-					  throw new CuentaBancariaException("Sr Cliente no posee la cantidad suficiente de saldo para realizar la extracciÛn");
-					  }
-			  }
-				  
-		 }
+					  else {
+						  throw new CuentaBancariaException("No posee la cantidad suficiente de saldo para realizar la extracciÛn");
+						  }
+				 }
+			 }
 		 }
 		 else {
-			 throw new CuentaBancariaException("Sr Cliente el monto a extraer de su cuenta corriente debe ser mayor a 0 .");
-		 }	
+			 throw new CuentaBancariaException("El monto a extraer de su cuenta corriente debe ser mayor a 0 .");
+		 }
 		//throw new RuntimeException("No implementado a√∫n");
 	}
 	/**
@@ -95,7 +94,7 @@ public class CuentaCorriente extends AbstractCuenta {
 	public Double getSaldo() {
 		return this.saldo;
 		//throw new RuntimeException("No implementado a√∫n");
-	}	
+	}
 	/**
 	 * Permite saber el saldo en descubierto
 	 * @return el descubierto de la cuenta
