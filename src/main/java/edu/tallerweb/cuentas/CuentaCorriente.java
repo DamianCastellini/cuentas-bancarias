@@ -53,7 +53,7 @@ public class CuentaCorriente extends AbstractCuenta {
 			}
 		}
 		else {
-			throw new CuentaBancariaException("Sr Cliente: Debe depositar un monto mayor a 0.");
+			throw new CuentaBancariaException("Debe depositar un monto mayor a 0.");
 		}
 		//throw new RuntimeException("No implementado aÃºn");
 	}
@@ -71,19 +71,18 @@ public class CuentaCorriente extends AbstractCuenta {
 			 }
 			 else {
 				 if (this.saldo < monto) {
-					  if ((this.saldo + this.descubiertoTotal + 
-							  ((this.descubiertoDeLaCuenta - this.descubiertoTotal) * COMISION)) >= monto) {
+					  if ((this.saldo + this.descubiertoTotal + ((this.descubiertoDeLaCuenta - this.descubiertoTotal) * COMISION)) >= monto) {
 						  this.descubiertoTotal -= ((monto - this.saldo) * COMISION);
 						  this.saldo = CERO;
 					  }
 					  else {
-						  throw new CuentaBancariaException("No posee la cantidad suficiente de saldo para realizar la extracción");
+						  throw new CuentaBancariaException("No posee saldo para realizar la extracción");
 						  }
 				 }
 			 }
 		 }
 		 else {
-			 throw new CuentaBancariaException("El monto a extraer de su cuenta corriente debe ser mayor a 0 .");
+			 throw new CuentaBancariaException("El monto a extraer debe ser mayor a 0 .");
 		 }
 		//throw new RuntimeException("No implementado aÃºn");
 	}

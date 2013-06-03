@@ -22,11 +22,10 @@ public class CajaAhorros extends AbstractCuenta {
 			this.saldo += monto;
 		}
 		else {
-			throw new CuentaBancariaException("Debe depositar un saldo mayor a 0 en su caja de ahorros.");
+			throw new CuentaBancariaException("Debe depositar un saldo mayor a 0.");
 		}
 		//throw new RuntimeException("No implementado a√∫n");
 	}
-
 	/**
 	 * Se cobran $6 adicionales por cada extracci√≥n luego de
 	 * la quinta.
@@ -45,13 +44,13 @@ public class CajaAhorros extends AbstractCuenta {
 				}
 				else {
 					if (this.saldo < monto || this.saldo <= monto + IMPUESTO) {
-						throw new CuentaBancariaException("No dispone de saldo para realizar la extracciÛn que desea en su caja de ahorros.");
+						throw new CuentaBancariaException("No posee saldo para realizar la extracciÛn.");
 					}
 				}
 			}
-			}
-	    else {
-	    	throw new CuentaBancariaException("El monto a extraer de su caja de ahorros debe ser mayor a 0 .");
+		}
+				else {
+	    	throw new CuentaBancariaException("El monto a extraer debe ser mayor a 0 .");
 		}
 		//throw new RuntimeException("No implementado a√∫n");
 	}
