@@ -20,8 +20,7 @@ public class CajaAhorros extends AbstractCuenta {
 	public void depositar(final Double monto) {
 		if (monto > CERO) {
 			this.saldo += monto;
-		}
-		else {
+		} else {
 			throw new CuentaBancariaException("Debe depositar un saldo mayor a 0.");
 		}
 		//throw new RuntimeException("No implementado aún");
@@ -36,20 +35,17 @@ public class CajaAhorros extends AbstractCuenta {
 			if (this.saldo >= monto && numeroDeExtraccion < MAX) {
 				this.saldo -= monto;
 				numeroDeExtraccion++;
-			}
-			else {
+			} else {
 				if (this.saldo >= (monto + IMPUESTO) && numeroDeExtraccion >= MAX) {
 					this.saldo -= (monto + IMPUESTO);
 					numeroDeExtraccion++;
-				}
-				else {
+				} else {
 					if (this.saldo < monto || this.saldo <= monto + IMPUESTO) {
 						throw new CuentaBancariaException("No posee saldo para extraer.");
 					}
 				}
 			}
-		}
-				else {
+		} else {
 	    	throw new CuentaBancariaException("El monto a extraer debe ser mayor a 0 .");
 		}
 		//throw new RuntimeException("No implementado aún");

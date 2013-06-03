@@ -17,8 +17,7 @@ public class CuentaSueldo extends AbstractCuenta {
 	public void depositar(final Double monto) {
 		if (monto > CERO) {
 			this.saldo += monto;
-		}
-		else {
+		} else {
 			throw new CuentaBancariaException("Debe depositar un saldo mayor a 0.");
 			//throw new RuntimeException("No implementado aÃºn");
 		}
@@ -31,14 +30,12 @@ public class CuentaSueldo extends AbstractCuenta {
 		if (monto > CERO) {
 			if (this.saldo >= monto) {
 				this.saldo -= monto;
-				}
-		else {
-			throw new CuentaBancariaException("No dispone de saldo para realizar la extracción.");
+				} else {
+					throw new CuentaBancariaException("No dispone de saldo para realizar la extracción.");
 		}
 		//throw new RuntimeException("No implementado aÃºn");
-	    }
-		else {
-			throw new CuentaBancariaException("El monto a extraer debe ser mayor a 0.");
+	    } else {
+	    	throw new CuentaBancariaException("El monto a extraer debe ser mayor a 0.");
 		}
 	}
 	/**
