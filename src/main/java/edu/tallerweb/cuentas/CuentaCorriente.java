@@ -76,13 +76,13 @@ public class CuentaCorriente extends AbstractCuenta {
 						  this.saldo = CERO;
 					  }
 					  else {
-						  throw new CuentaBancariaException("No posee saldo para realizar la extracción");
+						  throw new CuentaBancariaException("No posee saldo para extraer");
 						  }
 				 }
 			 }
 		 }
 		 else {
-			 throw new CuentaBancariaException("El monto a extraer debe ser mayor a 0 .");
+			 throw new CuentaBancariaException("El monto a extraer debe ser mayor a 0.");
 		 }
 		//throw new RuntimeException("No implementado aÃºn");
 	}

@@ -28,10 +28,10 @@ public class CuentaSueldo extends AbstractCuenta {
 	 * @param monto a extraer
 	 */
 	public void extraer(final Double monto) {
-		if (monto > CERO) {		
-		if (this.saldo >= monto) {
-			this.saldo -= monto;
-		}
+		if (monto > CERO) {
+			if (this.saldo >= monto) {
+				this.saldo -= monto;
+				}
 		else {
 			throw new CuentaBancariaException("No dispone de saldo para realizar la extracción.");
 		}

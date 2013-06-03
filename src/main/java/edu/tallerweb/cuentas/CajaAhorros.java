@@ -7,7 +7,7 @@ package edu.tallerweb.cuentas;
  */
 public class CajaAhorros extends AbstractCuenta {
 	private Integer numeroDeExtraccion;
-	private static final Integer NUMEROMAXIMODEEXTRACCIONES = 5;
+	private static final Integer MAX = 5;
 	private static final Double IMPUESTO = 6.00;
 	public CajaAhorros() {
 		super();
@@ -33,18 +33,18 @@ public class CajaAhorros extends AbstractCuenta {
 	 */
 	public void extraer(final Double monto) {
 		if (monto > CERO) {
-			if (this.saldo >= monto && numeroDeExtraccion < NUMEROMAXIMODEEXTRACCIONES) {
+			if (this.saldo >= monto && numeroDeExtraccion < MAX) {
 				this.saldo -= monto;
 				numeroDeExtraccion++;
 			}
 			else {
-				if (this.saldo >= (monto + IMPUESTO) && numeroDeExtraccion >= NUMEROMAXIMODEEXTRACCIONES) {
+				if (this.saldo >= (monto + IMPUESTO) && numeroDeExtraccion >= MAX) {
 					this.saldo -= (monto + IMPUESTO);
 					numeroDeExtraccion++;
 				}
 				else {
 					if (this.saldo < monto || this.saldo <= monto + IMPUESTO) {
-						throw new CuentaBancariaException("No posee saldo para realizar la extracción.");
+						throw new CuentaBancariaException("No posee saldo para extraer.");
 					}
 				}
 			}
