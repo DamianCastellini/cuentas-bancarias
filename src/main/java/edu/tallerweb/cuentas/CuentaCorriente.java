@@ -69,15 +69,15 @@ public class CuentaCorriente extends AbstractCuenta {
 	 * @param monto a extraer
 	 */
 	public void extraer(final Double monto) {
-		 if(monto > 0.00){
-			 if(this.saldo >= monto){
+		 if (monto > 0.00){
+			 if (this.saldo >= monto){
 		 
 			   this.saldo -= monto;
 			 }
 			 else
 			 {
-			  if(this.saldo < monto){
-				  if((this.saldo + this.descubiertoTotal + ((this.descubiertoDeLaCuenta - this.descubiertoTotal) * 1.05)) > monto){					  
+			  if (this.saldo < monto){
+				  if ((this.saldo + this.descubiertoTotal + ((this.descubiertoDeLaCuenta - this.descubiertoTotal) * 1.05)) >= monto){					  
 					  this.descubiertoTotal -= ((monto - this.saldo) * 1.05 );
 					  this.saldo = 0.00 ;
 					  }

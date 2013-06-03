@@ -17,7 +17,7 @@ public class CuentaSueldo extends AbstractCuenta {
 	 * @param monto a depositar
 	 */
 	public void depositar(final Double monto) {
-		if(monto > 0.00){
+		if (monto > 0.00){
 			this.saldo += monto;	
 		}
 		else{
@@ -31,9 +31,8 @@ public class CuentaSueldo extends AbstractCuenta {
 	 * @param monto a extraer
 	 */
 	public void extraer(final Double monto) {
-		if(monto > 0.00){
-			
-		if(this.saldo >= monto){
+		if (monto > 0.00){		
+		if (this.saldo >= monto){
 			this.saldo -= monto;
 		}
 		else{
