@@ -19,8 +19,7 @@ package edu.tallerweb.cuentas;
 public class CuentaCorriente extends AbstractCuenta {
 	private Double descubiertoTotal;
 	private Double descubiertoDeLaCuenta;
-
-	
+	private static final Double COMISION = 1.05;
 	/**
 	 * Toda cuenta corriente se inicia con un límite total
 	 * para el descubierto.
@@ -32,7 +31,6 @@ public class CuentaCorriente extends AbstractCuenta {
 		this.descubiertoDeLaCuenta = descubiertoTotal;
 		//throw new RuntimeException("No implementado aún");
 	}
-	
 	/**
 	 * Todo depósito deberá cubrir primero el descubierto,
 	 * si lo hubiera, y luego contar para el saldo de la
@@ -40,27 +38,26 @@ public class CuentaCorriente extends AbstractCuenta {
 	 * @param monto a depositar
 	 */
 	public void depositar(final Double monto) {
-		if(monto > 0.00){ 
-			if(this.descubiertoTotal == this.descubiertoDeLaCuenta){
+		if (monto > CERO) { 
+			if (this.descubiertoTotal == this.descubiertoDeLaCuenta) {
 				this.saldo += monto;
 				}
-			else{
-				  if(monto >= (this.descubiertoDeLaCuenta - this.descubiertoTotal)){
+			else {
+				  if (monto >= (this.descubiertoDeLaCuenta - this.descubiertoTotal)) {
 					  this.saldo = monto - (this.descubiertoDeLaCuenta - this.descubiertoTotal);
 					  this.descubiertoTotal = this.descubiertoDeLaCuenta;
 				}
-				else{
+				else {
 					this.descubiertoTotal += monto;		
 				}
 				
 				}
 		}
-		else{
+		else {
 			throw new CuentaBancariaException("Sr Cliente: Debe depositar un monto mayor a 0.");
 			}
 		//throw new RuntimeException("No implementado aún");
 	}
-
 	/**
 	 * Se cobrará el 5% de comisión sobre el monto girado
 	 * en descubierto.
@@ -69,33 +66,28 @@ public class CuentaCorriente extends AbstractCuenta {
 	 * @param monto a extraer
 	 */
 	public void extraer(final Double monto) {
-		 if (monto > 0.00){
-			 if (this.saldo >= monto){
-		 
+		 if (monto > CERO) {
+			 if (this.saldo >= monto) {
 			   this.saldo -= monto;
 			 }
-			 else
-			 {
-			  if (this.saldo < monto){
-				  if ((this.saldo + this.descubiertoTotal + ((this.descubiertoDeLaCuenta - this.descubiertoTotal) * 1.05)) >= monto){					  
-					  this.descubiertoTotal -= ((monto - this.saldo) * 1.05 );
+			 else {
+				 if (this.saldo < monto) {
+				  if ((this.saldo + this.descubiertoTotal + ((this.descubiertoDeLaCuenta - this.descubiertoTotal) * COMISION)) >= monto) {					  
+					  this.descubiertoTotal -= ((monto - this.saldo) * COMISION );
 					  this.saldo = 0.00 ;
 					  }
-				  else{
+				  else {
 					  throw new CuentaBancariaException("Sr Cliente no posee la cantidad suficiente de saldo para realizar la extracci�n");
 					  }
 			  }
 				  
 		 }
 		 }
-		 else{
+		 else {
 			 throw new CuentaBancariaException("Sr Cliente el monto a extraer de su cuenta corriente debe ser mayor a 0 .");
-		 }
-			
-		
+		 }	
 		//throw new RuntimeException("No implementado aún");
 	}
-
 	/**
 	 * Permite saber el saldo de la cuenta
 	 * @return el saldo de la cuenta
@@ -103,8 +95,7 @@ public class CuentaCorriente extends AbstractCuenta {
 	public Double getSaldo() {
 		return this.saldo;
 		//throw new RuntimeException("No implementado aún");
-	}
-	
+	}	
 	/**
 	 * Permite saber el saldo en descubierto
 	 * @return el descubierto de la cuenta
@@ -113,5 +104,4 @@ public class CuentaCorriente extends AbstractCuenta {
 		return this.descubiertoTotal;
 		//throw new RuntimeException("No implementado aún");
 	}
-
 }

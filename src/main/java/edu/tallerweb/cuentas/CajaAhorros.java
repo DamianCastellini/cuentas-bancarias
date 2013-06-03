@@ -6,22 +6,22 @@ package edu.tallerweb.cuentas;
  * por extracción de $ 6
  */
 public class CajaAhorros extends AbstractCuenta {
-	  private Integer numeroDeExtraccion;
-
-	public CajaAhorros(){
+	private Integer numeroDeExtraccion;
+	private static final Integer NUMEROMAXIMODEEXTRACCIONES = 5;
+	private static final Double IMPUESTO = 6.00;
+	public CajaAhorros() {
 		super();
 		this.numeroDeExtraccion = 0;
 	}
-	
 	/**
 	 * No hay reglas adicionales para el depósito
 	 * @param monto a depositar
 	 */
 	public void depositar(final Double monto) {
-		if (monto > 0.00){
+		if (monto > CERO) {
 			this.saldo += monto;	
 		}
-		else{
+		else {
 			throw new CuentaBancariaException("Sr cliente debe depositar un saldo mayor a 0 en su caja de ahorros.");
 		}
 		//throw new RuntimeException("No implementado aún");
@@ -33,32 +33,28 @@ public class CajaAhorros extends AbstractCuenta {
 	 * @param monto a extraer
 	 */
 	public void extraer(final Double monto) {
-		if (monto > 0.00){
-			if(this.saldo >= monto && numeroDeExtraccion < 5){
+		if (monto > CERO) {
+			if(this.saldo >= monto && numeroDeExtraccion < NUMEROMAXIMODEEXTRACCIONES) {
 				this.saldo -= monto;
 				numeroDeExtraccion++;
 			}
-			else{
-				if (this.saldo >= (monto + 6.00) && numeroDeExtraccion >= 5){
+			else {
+				if (this.saldo >= (monto + 6.00) && numeroDeExtraccion >= 5) {
 					this.saldo -= (monto + 6.00);
 					numeroDeExtraccion++;
 				}
-				else{
-					if (this.saldo < monto || this.saldo <= monto + 6.00){
+				else {
+					if (this.saldo < monto || this.saldo <= monto + IMPUESTO) {
 						throw new CuentaBancariaException("Sr Cliente no dispone de saldo para realizar la extracci�n que desea en su caja de ahorros.");
 					}
 				}
 			}
 		}
-	    else{
-			throw new CuentaBancariaException("Sr cliente el monto a extraer de su caja de ahorros debe ser mayor a 0 .");
+	    else {
+	    	throw new CuentaBancariaException("Sr cliente el monto a extraer de su caja de ahorros debe ser mayor a 0 .");
 		}
-	
-		
-		
 		//throw new RuntimeException("No implementado aún");
 	}
-
 	/**
 	 * Permite saber el saldo de la cuenta
 	 * @return el saldo de la cuenta
@@ -67,5 +63,4 @@ public class CajaAhorros extends AbstractCuenta {
 		return this.saldo;
 		//throw new RuntimeException("No implementado aún");
 	}
-
 }
